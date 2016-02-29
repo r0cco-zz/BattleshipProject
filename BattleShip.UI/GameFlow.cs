@@ -313,6 +313,7 @@ namespace BattleShip.UI
                 Console.Clear();
                 //TODO: ask them if they want to enter new names
                 _freshGame = false;
+                _gameOver = false;
                 PlayGame();
             }
             else
