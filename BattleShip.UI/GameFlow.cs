@@ -267,7 +267,14 @@ namespace BattleShip.UI
                     Console.WriteLine("You hit something! (Press enter)");
                     Console.ReadLine();
                     Console.Clear();
-                    _isPlayerOnesTurn = false;
+                    if (_isPlayerOnesTurn)
+                    {
+                        _isPlayerOnesTurn = false;
+                    }
+                    else if (!_isPlayerOnesTurn)
+                    {
+                        _isPlayerOnesTurn = true;
+                    }
                     break;
 
                 case ShotStatus.Duplicate:
@@ -282,7 +289,14 @@ namespace BattleShip.UI
                                       " (Press enter)");
                     Console.ReadLine();
                     Console.Clear();
-                    _isPlayerOnesTurn = false;
+                    if (_isPlayerOnesTurn)
+                    {
+                        _isPlayerOnesTurn = false;
+                    }
+                    else if (!_isPlayerOnesTurn)
+                    {
+                        _isPlayerOnesTurn = true;
+                    }
                     break;
 
                 case ShotStatus.Invalid:
@@ -295,7 +309,14 @@ namespace BattleShip.UI
                     Console.WriteLine("Your projectile splashes into the ocean, you missed! (Press enter)");
                     Console.ReadLine();
                     Console.Clear();
-                    _isPlayerOnesTurn = false;
+                    if (_isPlayerOnesTurn)
+                    {
+                        _isPlayerOnesTurn = false;
+                    }
+                    else if (!_isPlayerOnesTurn)
+                    {
+                        _isPlayerOnesTurn = true;
+                    }
                     break;
 
                 case ShotStatus.Victory:
