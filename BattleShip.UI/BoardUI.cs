@@ -90,8 +90,8 @@ namespace BattleShip.UI
                         Console.ForegroundColor = ConsoleColor.Yellow;
 
                     }
-                    if (playerBoard.ShotHistory.ContainsKey(coord) &&
-                        playerBoard.ShotHistory.ContainsValue(ShotHistory.Miss))
+                    else if (playerBoard.ShotHistory.ContainsKey(coord) &&
+                             playerBoard.ShotHistory.ContainsValue(ShotHistory.Miss))
                     {
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Displaychar = "M";
