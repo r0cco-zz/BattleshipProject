@@ -189,6 +189,7 @@ namespace BattleShip.UI
                         }
                             break;
                         default:
+                            //TODO: invalid input for direction, board should be redrawn and placement restarted
                             placementIsGood = false;
                             break;
                     }
