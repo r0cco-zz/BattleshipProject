@@ -1,0 +1,11 @@
+C:\_repos\Sept_dotNet\Battleship\Battleship project\BattleShip_Experimental\BattleShip.UI\bin\Debug\BattleShip.UI.exe.config
+C:\_repos\Sept_dotNet\Battleship\Battleship project\BattleShip_Experimental\BattleShip.UI\bin\Debug\BattleShip.UI.exe
+C:\_repos\Sept_dotNet\Battleship\Battleship project\BattleShip_Experimental\BattleShip.UI\bin\Debug\BattleShip.UI.pdb
+C:\_repos\Sept_dotNet\Battleship\Battleship project\BattleShip_Experimental\BattleShip.UI\bin\Debug\BattleShip.BLL.dll
+C:\_repos\Sept_dotNet\Battleship\Battleship project\BattleShip_Experimental\BattleShip.UI\bin\Debug\BattleShip.BLL.pdb
+C:\_repos\Sept_dotNet\Battleship\Battleship project\BattleShip_Experimental\BattleShip.UI\obj\Debug\BattleShip.UI.csprojResolveAssemblyReference.cache
+C:\_repos\Sept_dotNet\Battleship\Battleship project\BattleShip_Experimental\BattleShip.UI\obj\Debug\BattleShip.UI.exe
+C:\_repos\Sept_dotNet\Battleship\Battleship project\BattleShip_Experimental\BattleShip.UI\obj\Debug\BattleShip.UI.pdb
+C:\_repos\BattleshipProject\BattleShip.UI\bin\Debug\BattleShip.UI.exe.config
+C:\_repos\BattleshipProject\BattleShip.UI\obj\Debug\BattleShip.UI.exe
+C:\_repos\BattleshipProject\BattleShip.UI\obj\Debug\BattleShip.UI.pdb
