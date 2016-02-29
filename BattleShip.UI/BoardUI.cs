@@ -15,9 +15,9 @@ namespace BattleShip.UI
     {
         private static readonly string[] _aToJ = {" A ", " B ", " C ", " D ", " E ", " F ", " G ", " H ", " I ", " J "};
 
-        public static void DisplayGameBoard(Board playerBoard)
+        public static void DisplayGameBoardForShotFiring(Board playerBoard)
         {
-            //Board newBoard = new Board();
+            //TODO: get rid of ugly second loop for row 10
 
             string Displaychar = "~";
             //get Displaychar to change based on ship placement & shot history
@@ -115,7 +115,7 @@ namespace BattleShip.UI
             }
         }
 
-        public static void DisplayShipBoard(Board playerBoard)
+        public static void DisplayGameBoardForShipPlacement(Board playerBoard)
         {
             string Displaychar = "~";
 
