@@ -23,6 +23,9 @@ namespace BattleShip.UI
 
         public void PlayGame()
         {
+            _player1.GameBoard = new Board();
+            _player2.GameBoard = new Board();
+
             if (_freshGame)
             {
                 GetPlayerNames();
