@@ -25,13 +25,13 @@ namespace BattleShip.UI.GameFlowResponses
                 {
                     check++;
                 }
-                if (int.TryParse(a.Substring(1, 1), out good))
-                {
-                    check++; //Ensure 2nd string element is an int. out good is irrelevent.
-                }
                 if (int.TryParse(a.Substring(1, 2), out good) && good == 10)
                 {
                     check++;
+                }
+                else if (int.TryParse(a.Substring(1, 1), out good))
+                {
+                    check++; //Ensure 2nd string element is an int. out good is irrelevent.
                 }
                 if (check == 2) //Two checks means we're good.
                 {
