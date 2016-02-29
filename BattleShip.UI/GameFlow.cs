@@ -19,14 +19,28 @@ namespace BattleShip.UI
 
         private bool _isPlayerOnesTurn = true;
         private bool _gameOver;
+        private bool _freshGame = true;
 
         public void PlayGame()
         {
-            GetPlayerNames();
+            if (_freshGame)
+            {
+                GetPlayerNames();
+            }
+            Console.Clear();
+            Console.WriteLine("{0}, press enter to start placing ships.\n\n{1} LOOK AWAY!!", _player1.Name,
+                _player2.Name);
+            Console.ReadLine();
+            Console.Clear();
             PlaceShips(_player1);
+            Console.Clear();
+            Console.WriteLine("{0}, press enter to start placing ships.\n\n{1} LOOK AWAY!!", _player2.Name,
+                _player1.Name);
+            Console.ReadLine();
+            Console.Clear();
             PlaceShips(_player2);
             FireShots();
-            //PromptPlayAgain();
+            PromptPlayAgain();
         }
 
         private void GetPlayerNames()
@@ -58,7 +72,7 @@ namespace BattleShip.UI
             // display empty game board for player1 (I put this in the loop)
 
             // prompt player1 for coordinate entry (use letterconverter for xcoordinate)
-            foreach (ShipType stype in Enum.GetValues(typeof(ShipType)))
+            foreach (ShipType stype in Enum.GetValues(typeof (ShipType)))
             {
                 int shipLength;
                 switch (stype)
@@ -208,167 +222,102 @@ namespace BattleShip.UI
                 while (_isPlayerOnesTurn && !_gameOver)
                 {
                     //TODO:reverse these boards so player is taking shots in his own board and vice versa
-                    BoardUI.DisplayGameBoardForShotFiring(_player2.GameBoard);
-                    string p1Shot;
-
-                    //Testing if valid input
-                    bool coordIsValid;
-                    do
-                    {
-                        IsPlayercoordValid IsItValid = new IsPlayercoordValid();
-
-                        Console.Write("{0}, Take a shot! : ", _player1.Name);
-                        p1Shot = Console.ReadLine();
-
-                        coordIsValid = IsItValid.IsItGood(p1Shot);
-
-                    } while (coordIsValid == false);
-
-                    var p1Shotx = p1Shot.Substring(0, 1);
-                    var p1Shotxasint = LetterConverter.ConvertToNumber(p1Shotx);
-                    var p1Shoty = int.Parse(p1Shot.Substring(1));
-
-                    var shotcoord = new Coordinate(p1Shotxasint, p1Shoty);
-
-                    var p1FireShotResponse = _player2.GameBoard.FireShot(shotcoord);
-
-                    if (p1FireShotResponse.ShotStatus == ShotStatus.Hit)
-                    {
-                        Console.WriteLine("You hit something! (Press enter)");
-                        Console.ReadLine();
-                        Console.Clear();
-                        _isPlayerOnesTurn = false;
-                    }
-                    if (p1FireShotResponse.ShotStatus == ShotStatus.Duplicate)
-                    {
-                        Console.WriteLine("You already shot at that spot! (Press enter)");
-                        Console.ReadLine();
-                        Console.Clear();
-                    }
-                    if (p1FireShotResponse.ShotStatus == ShotStatus.HitAndSunk)
-                    {
-                        Console.WriteLine("Hit! You sunk your opponent's " + p1FireShotResponse.ShipImpacted + " (Press enter)");
-                        Console.ReadLine();
-                        Console.Clear();
-                        _isPlayerOnesTurn = false;
-                    }
-                    if (p1FireShotResponse.ShotStatus == ShotStatus.Invalid)
-                    {
-                        Console.WriteLine("Invalid coordinate, try again! (Press enter)");
-                        Console.ReadLine();
-                        Console.Clear();
-                    }
-                    if (p1FireShotResponse.ShotStatus == ShotStatus.Miss)
-                    {
-                        Console.WriteLine("Your projectile splashes into the ocean, you missed! (Press enter)");
-                        Console.ReadLine();
-                        Console.Clear();
-                        _isPlayerOnesTurn = false;
-                    }
-                    if (p1FireShotResponse.ShotStatus == ShotStatus.Victory)
-                    {
-                        Console.WriteLine("You have sunk all your opponent's ships, you win! (Press enter)");
-                        Console.ReadLine();
-                        Console.Clear();
-                        _gameOver = true;
-                        break;
-                    }
+                    TakeTurnsFiring(_player1, _player2.GameBoard);
                 }
-
                 while (!_isPlayerOnesTurn && !_gameOver)
                 {
-                    BoardUI.DisplayGameBoardForShotFiring(_player1Board);
-
-                    string p2shot = "";
-                    string p2shotx = "";
-                    //checks
-
-                    //Testing if valid input
-                    bool coordIsValid = false;
-                    do
-                    {
-                        IsPlayercoordValid IsItValid = new IsPlayercoordValid();
-
-                        Console.Write("{0}, Take a shot! : ", Player.Name2);
-                        p2shot = Console.ReadLine();
-
-                        coordIsValid = IsItValid.IsItGood(p2shot);
-
-                    } while (coordIsValid == false);
-                    //end of testing
-
-                    //do
-                    //{
-                    //    Console.Write("{0}, Take a shot! : ", Player.Name2);
-                    //    p2shot = Console.ReadLine();
-                    //} while (p2shotx.Length > 2);
-                    p2shotx = p2shot.Substring(0, 1);
-                    int p2shotxasint = LetterConverter.ConvertToNumber(p2shotx);
-                    int p2shoty = int.Parse(p2shot.Substring(1));
-
-
-                    Coordinate shotcoord = new Coordinate(p2shotxasint, p2shoty);
-
-                    var p2FireShotResponse = _player1Board.FireShot(shotcoord);
-
-                    if (p2FireShotResponse.ShotStatus == ShotStatus.Hit)
-                    {
-                        Console.WriteLine("You hit something! (Press enter)");
-                        Console.ReadLine();
-                        Console.Clear();
-                        _isPlayerOnesTurn = true;
-                    }
-                    if (p2FireShotResponse.ShotStatus == ShotStatus.Duplicate)
-                    {
-                        Console.WriteLine("You already shot at that spot! (Press enter)");
-                        Console.ReadLine();
-                        Console.Clear();
-                    }
-                    if (p2FireShotResponse.ShotStatus == ShotStatus.HitAndSunk)
-                    {
-                        Console.WriteLine("Hit! You sunk your opponent's " + p2FireShotResponse.ShipImpacted + " (Press enter)");
-                        Console.ReadLine();
-                        Console.Clear();
-                        _isPlayerOnesTurn = true;
-                    }
-                    if (p2FireShotResponse.ShotStatus == ShotStatus.Invalid)
-                    {
-                        Console.WriteLine("Invalid coordinate, try again! (Press enter)");
-                        Console.ReadLine();
-                        Console.Clear();
-                    }
-                    if (p2FireShotResponse.ShotStatus == ShotStatus.Miss)
-                    {
-                        Console.WriteLine("Your projectile splashes into the ocean, you missed! (Press enter)");
-                        Console.ReadLine();
-                        Console.Clear();
-                        _isPlayerOnesTurn = true;
-                    }
-                    if (p2FireShotResponse.ShotStatus == ShotStatus.Victory)
-                    {
-                        Console.WriteLine("You have sunk all your opponent's ships, you win! (Press enter)");
-                        Console.ReadLine();
-                        Console.Clear();
-                        _gameOver = true;
-                    }
+                    TakeTurnsFiring(_player2, _player1.GameBoard);
                 }
             }
             Console.Clear();
+        }
 
-            //TODO: break this into a different method PromptPlayAgain()
+        public void TakeTurnsFiring(Player player, Board boardToBeFiredUpon)
+        {
+            BoardUI.DisplayGameBoardForShotFiring(boardToBeFiredUpon);
+            string playerShot;
+            bool coordIsValid;
+
+            do
+            {
+                IsPlayercoordValid IsItValid = new IsPlayercoordValid();
+
+                Console.Write("{0}, Take a shot! : ", player.Name);
+                playerShot = Console.ReadLine();
+
+                coordIsValid = IsItValid.IsItGood(playerShot);
+
+            } while (!coordIsValid);
+
+            var playerShotx = playerShot.Substring(0, 1);
+            var playerShotXAsInt = LetterConverter.ConvertToNumber(playerShotx);
+            var playerShoty = int.Parse(playerShot.Substring(1));
+
+            var shotcoord = new Coordinate(playerShotXAsInt, playerShoty);
+
+            var playerFireShotResponse = _player2.GameBoard.FireShot(shotcoord);
+
+            if (playerFireShotResponse.ShotStatus == ShotStatus.Hit)
+            {
+                Console.WriteLine("You hit something! (Press enter)");
+                Console.ReadLine();
+                Console.Clear();
+                _isPlayerOnesTurn = false;
+            }
+            if (playerFireShotResponse.ShotStatus == ShotStatus.Duplicate)
+            {
+                Console.WriteLine("You already shot at that spot! (Press enter)");
+                Console.ReadLine();
+                Console.Clear();
+            }
+            if (playerFireShotResponse.ShotStatus == ShotStatus.HitAndSunk)
+            {
+                //TODO: player name instead of "opponent"?
+                Console.WriteLine("Hit! You sunk your opponent's " + playerFireShotResponse.ShipImpacted +
+                                  " (Press enter)");
+                Console.ReadLine();
+                Console.Clear();
+                _isPlayerOnesTurn = false;
+            }
+            if (playerFireShotResponse.ShotStatus == ShotStatus.Invalid)
+            {
+                Console.WriteLine("Invalid coordinate, try again! (Press enter)");
+                Console.ReadLine();
+                Console.Clear();
+            }
+            if (playerFireShotResponse.ShotStatus == ShotStatus.Miss)
+            {
+                Console.WriteLine("Your projectile splashes into the ocean, you missed! (Press enter)");
+                Console.ReadLine();
+                Console.Clear();
+                _isPlayerOnesTurn = false;
+            }
+            if (playerFireShotResponse.ShotStatus == ShotStatus.Victory)
+            {
+                Console.WriteLine("You have sunk all your opponent's ships, you win! (Press enter)");
+                Console.ReadLine();
+                Console.Clear();
+                _gameOver = true;
+            }
+        }
+
+
+        private void PromptPlayAgain()
+        {
             //Yay, someone won. Play again?
             Console.Write("Play again? Type y or yes to play again. Type anything else to Quit: ");
-            string playAgain = Console.ReadLine();
+            var playAgain = Console.ReadLine();
 
-            if (playAgain == "y" || playAgain == "yes")
+            if (!String.IsNullOrEmpty(playAgain) && (playAgain.ToLower() == "y" || playAgain.ToLower() == "yes"))
             {
-                NewGame goAgain = new NewGame();
-                //Restarting game.
                 Console.Clear();
-                goAgain.StartNewGame();
+                //TODO: ask them if they want to enter new names
+                _freshGame = false;
+                PlayGame();
             }
             else
             {
+                //TODO: make a splash screen for game exit
                 Console.WriteLine("Thanks for playing! Press Enter to quit.");
                 Console.ReadLine();
             }

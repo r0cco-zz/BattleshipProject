@@ -9,15 +9,5 @@ namespace BattleShip.UI.GameFlowResponses
 {
     public class NewGame
     {
-        public void StartNewGame()
-        {
-            GameFlow gf = new GameFlow();
-
-            gf.Player1ShipPlacement();
-
-            gf.Player2ShipPlacement();
-
-            gf.FireShots();
-        }
     }
 }

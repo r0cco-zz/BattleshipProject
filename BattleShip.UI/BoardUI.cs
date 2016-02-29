@@ -117,6 +117,7 @@ namespace BattleShip.UI
 
         public static void DisplayGameBoardForShipPlacement(Board playerBoard)
         {
+            //TODO: get rid of ugly second loop for row 10
             string Displaychar = "~";
 
             for (int i = 0; i < 10; i++)
