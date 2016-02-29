@@ -101,12 +101,12 @@ namespace BattleShip.UI
 
                 do
                 {
-                    BoardUI.DisplayGameBoardForShipPlacement(player.GameBoard);
-
                     string shipplacecoord;
                     bool coordIsValid;
                     do
                     {
+                        BoardUI.DisplayGameBoardForShipPlacement(player.GameBoard);
+
                         var isItValid = new IsPlayercoordValid();
 
                         Console.WriteLine();
@@ -114,6 +114,13 @@ namespace BattleShip.UI
                         shipplacecoord = Console.ReadLine();
 
                         coordIsValid = isItValid.IsItGood(shipplacecoord);
+
+                        if (!coordIsValid)
+                        {
+                            Console.WriteLine("That is not a valid coordinate. Press enter to choose again");
+                            Console.ReadLine();
+                            Console.Clear();
+                        }
 
                     } while (!coordIsValid);
 
@@ -196,12 +203,16 @@ namespace BattleShip.UI
             switch (whereIsShip)
             {
                 case ShipPlacement.NotEnoughSpace:
-                    Console.Clear();
                     Console.WriteLine("Not enough space to place ship there, try again!");
+                    Console.WriteLine("Press enter");
+                    Console.ReadLine();
+                    Console.Clear();
                     return false;
                 case ShipPlacement.Overlap:
-                    Console.Clear();
                     Console.WriteLine("You are overlapping another ship, try again!");
+                    Console.WriteLine("Press enter");
+                    Console.ReadLine();
+                    Console.Clear();
                     return false;
                 case ShipPlacement.Ok:
                     ShipCreator.CreateShip(stype);
@@ -233,18 +244,26 @@ namespace BattleShip.UI
 
         public void TakeTurnsFiring(Player player, Board boardToBeFiredUpon)
         {
-            BoardUI.DisplayGameBoardForShotFiring(boardToBeFiredUpon);
             string playerShot;
             bool coordIsValid;
 
             do
             {
+                BoardUI.DisplayGameBoardForShotFiring(boardToBeFiredUpon);
+
                 IsPlayercoordValid IsItValid = new IsPlayercoordValid();
 
                 Console.Write("{0}, Take a shot! : ", player.Name);
                 playerShot = Console.ReadLine();
 
                 coordIsValid = IsItValid.IsItGood(playerShot);
+
+                if (!coordIsValid)
+                {
+                    Console.WriteLine("That is not a valid coordinate. Press enter to choose again");
+                    Console.ReadLine();
+                    Console.Clear();
+                }
 
             } while (!coordIsValid);
 
@@ -254,7 +273,7 @@ namespace BattleShip.UI
 
             var shotcoord = new Coordinate(playerShotXAsInt, playerShoty);
 
-            var playerFireShotResponse = _player2.GameBoard.FireShot(shotcoord);
+            var playerFireShotResponse = boardToBeFiredUpon.FireShot(shotcoord);
 
             switch (playerFireShotResponse.ShotStatus)
             {

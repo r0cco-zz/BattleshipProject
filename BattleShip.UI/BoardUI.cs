@@ -81,7 +81,7 @@ namespace BattleShip.UI
                 {
                     Coordinate coord = new Coordinate(j + 1, i + 1);
                     if (playerBoard.ShotHistory.ContainsKey(coord) &&
-                        playerBoard.ShotHistory.ContainsValue(ShotHistory.Hit))
+                        playerBoard.ShotHistory[coord].Equals(ShotHistory.Hit))
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Displaychar = "H";
@@ -91,7 +91,7 @@ namespace BattleShip.UI
 
                     }
                     else if (playerBoard.ShotHistory.ContainsKey(coord) &&
-                             playerBoard.ShotHistory.ContainsValue(ShotHistory.Miss))
+                             playerBoard.ShotHistory[coord].Equals(ShotHistory.Miss))
                     {
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Displaychar = "M";
