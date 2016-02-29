@@ -8,7 +8,7 @@ namespace BattleShip.UI.GameFlowResponses
 {
     public class IsPlayercoordValid
     {
-        private char[] verifyAgainstChar = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'};
+        private readonly char[] _verifyAgainstChar = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'};
 
         public bool IsItGood(string a)
         {
@@ -18,28 +18,23 @@ namespace BattleShip.UI.GameFlowResponses
             }
 
             int check = 0;
-            for (int i = 0; i < verifyAgainstChar.Length - 1; i++)
+            int good;
+            for (int i = 0; i < _verifyAgainstChar.Length - 1; i++)
             {
-                int good;
-                if (a[0] == verifyAgainstChar[i]) //Ensure first char is letter a-j
+                if (a[0] == _verifyAgainstChar[i]) //Ensure first char is letter a-j
                 {
-                    check++;
-                }
-                if (int.TryParse(a.Substring(1, 2), out good) && good == 10)
-                {
-                    check++;
-                }
-                else if (int.TryParse(a.Substring(1, 1), out good))
-                {
-                    check++; //Ensure 2nd string element is an int. out good is irrelevent.
-                }
-                if (check == 2) //Two checks means we're good.
-                {
-                    return true;
+                    check = 1;
                 }
             }
-
-            return false;
+            if (a.Length == 3 && int.TryParse(a.Substring(1, 2), out good) && good == 10)
+            {
+                check++;
+            }
+            else if (a.Length == 2 && int.TryParse(a.Substring(1, 1), out good))
+            {
+                check++; //Ensure 2nd string element is an int. out good is irrelevent.
+            }
+            return (check == 2);
         }
     }
 }

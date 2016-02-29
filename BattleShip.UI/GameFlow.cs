@@ -104,27 +104,22 @@ namespace BattleShip.UI
                     BoardUI.DisplayGameBoardForShipPlacement(player.GameBoard);
 
                     string shipplacecoord;
-
-                    //Old coordinate check.
-                    //Console.Write("{0}, pick a coordinate for your {1} : ", Player.Name1, stype);
-                    //string shipplacecoord = Console.ReadLine();
-
-                    //Testing if valid input
                     bool coordIsValid;
                     do
                     {
                         var isItValid = new IsPlayercoordValid();
 
+                        Console.WriteLine();
                         Console.Write("{0}, pick a coordinate for your {1} : ", player.Name, stype);
                         shipplacecoord = Console.ReadLine();
 
                         coordIsValid = isItValid.IsItGood(shipplacecoord);
 
-                    } while (coordIsValid == false);
+                    } while (!coordIsValid);
 
                     var xAsLetter = shipplacecoord.Substring(0, 1);
                     var shipX = LetterConverter.ConvertToNumber(xAsLetter); //Convert 1st char from player input to int.
-                    var shipY = int.Parse(shipplacecoord.Substring(1, 1)); //Assign 2nd coord.
+                    var shipY = int.Parse(shipplacecoord.Substring(1)); //Assign 2nd coord.
 
                     var shipcoord = new Coordinate(shipX, shipY);
 
