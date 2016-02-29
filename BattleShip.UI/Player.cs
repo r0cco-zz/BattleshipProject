@@ -3,20 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BattleShip.BLL.GameLogic;
 
 namespace BattleShip.UI
 {
-    public static class Player
+    public class Player
     {
-        //BoardUI PlayerSpecificBoard = new BoardUI();
+        public static string Name { get; set; }
+        public Board GameBoard { get; set; }
 
-        public static string Name1 { get; set; }
-
-        public static string Name2 { get; set; }
-
-        //public static Player(string Name)
-        //{
-        //    this.Name = Name;
-        //}
     }
 }

@@ -16,15 +16,17 @@ namespace BattleShip.UI
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Clear();
 
+            Player player1;
+            Player player2;
+
             GameFlow gf = new GameFlow();
             StartMenu sm = new StartMenu();
-            //Player player1;
-            //Player player2;
 
             sm.DisplayStart();
             Console.Clear();
 
-            Console.WriteLine("{0}, press enter to start placing ships.\n\n{1} LOOK AWAY!!", Player.Name1,
+            // move this crap to gameflow
+            Console.WriteLine("{0}, press enter to start placing ships.\n\n{1} LOOK AWAY!!", Player.Name,
                 Player.Name2);
             Console.ReadLine();
             Console.Clear();

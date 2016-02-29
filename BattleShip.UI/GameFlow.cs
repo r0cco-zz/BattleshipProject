@@ -14,16 +14,17 @@ namespace BattleShip.UI
 {
     internal class GameFlow
     {
-        //public Player player1 { get; set; }
-        //public Player player2 { get; set; }
-
-        private Board _player1Board = new Board();
-        private Board _player2Board = new Board();
-
-        //private int[,] boardarray = new int[10, 10];
+        private Player _player1;
+        private Player _player2;
 
         private bool _isPlayerOnesTurn = true;
-        private bool _gameOver = false;
+        private bool _gameOver;
+
+        internal GameFlow(Player player1, Player player2)
+        {
+            _player1 = player1;
+            _player2 = player2;
+        }
 
         // get player 1 to place ships
         public void Player1ShipPlacement()
