@@ -18,5 +18,10 @@ namespace BattleShip.UI
             Console.ReadLine();
             Console.Clear();
         }
+
+        public static void DisplayVictoryScreen(string playerName)
+        {
+            
+        }
     }
 }

@@ -55,7 +55,7 @@ namespace BattleShip.UI
                 _player1.Name = "Player1";
             }
 
-            Console.Write("\nPlayer 2, what is your name? : ");
+            Console.Write("\n\nPlayer 2, what is your name? : ");
             _player2.Name = Console.ReadLine();
             if (_player2.Name == String.Empty)
             {
@@ -261,47 +261,49 @@ namespace BattleShip.UI
 
             var playerFireShotResponse = _player2.GameBoard.FireShot(shotcoord);
 
-            if (playerFireShotResponse.ShotStatus == ShotStatus.Hit)
+            switch (playerFireShotResponse.ShotStatus)
             {
-                Console.WriteLine("You hit something! (Press enter)");
-                Console.ReadLine();
-                Console.Clear();
-                _isPlayerOnesTurn = false;
-            }
-            if (playerFireShotResponse.ShotStatus == ShotStatus.Duplicate)
-            {
-                Console.WriteLine("You already shot at that spot! (Press enter)");
-                Console.ReadLine();
-                Console.Clear();
-            }
-            if (playerFireShotResponse.ShotStatus == ShotStatus.HitAndSunk)
-            {
-                //TODO: player name instead of "opponent"?
-                Console.WriteLine("Hit! You sunk your opponent's " + playerFireShotResponse.ShipImpacted +
-                                  " (Press enter)");
-                Console.ReadLine();
-                Console.Clear();
-                _isPlayerOnesTurn = false;
-            }
-            if (playerFireShotResponse.ShotStatus == ShotStatus.Invalid)
-            {
-                Console.WriteLine("Invalid coordinate, try again! (Press enter)");
-                Console.ReadLine();
-                Console.Clear();
-            }
-            if (playerFireShotResponse.ShotStatus == ShotStatus.Miss)
-            {
-                Console.WriteLine("Your projectile splashes into the ocean, you missed! (Press enter)");
-                Console.ReadLine();
-                Console.Clear();
-                _isPlayerOnesTurn = false;
-            }
-            if (playerFireShotResponse.ShotStatus == ShotStatus.Victory)
-            {
-                Console.WriteLine("You have sunk all your opponent's ships, you win! (Press enter)");
-                Console.ReadLine();
-                Console.Clear();
-                _gameOver = true;
+                case ShotStatus.Hit:
+                    Console.WriteLine("You hit something! (Press enter)");
+                    Console.ReadLine();
+                    Console.Clear();
+                    _isPlayerOnesTurn = false;
+                    break;
+
+                case ShotStatus.Duplicate:
+                    Console.WriteLine("You already shot at that spot! (Press enter)");
+                    Console.ReadLine();
+                    Console.Clear();
+                    break;
+
+                case ShotStatus.HitAndSunk:
+                    //TODO: player name instead of "opponent"?
+                    Console.WriteLine("Hit! You sunk your opponent's " + playerFireShotResponse.ShipImpacted +
+                                      " (Press enter)");
+                    Console.ReadLine();
+                    Console.Clear();
+                    _isPlayerOnesTurn = false;
+                    break;
+
+                case ShotStatus.Invalid:
+                    Console.WriteLine("Invalid coordinate, try again! (Press enter)");
+                    Console.ReadLine();
+                    Console.Clear();
+                    break;
+
+                case ShotStatus.Miss:
+                    Console.WriteLine("Your projectile splashes into the ocean, you missed! (Press enter)");
+                    Console.ReadLine();
+                    Console.Clear();
+                    _isPlayerOnesTurn = false;
+                    break;
+
+                case ShotStatus.Victory:
+                    Console.WriteLine("You have sunk all your opponent's ships, you win! (Press enter)");
+                    Console.ReadLine();
+                    Console.Clear();
+                    _gameOver = true;
+                    break;
             }
         }
 
