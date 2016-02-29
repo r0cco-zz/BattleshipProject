@@ -17,7 +17,7 @@ namespace BattleShip.UI.GameFlowResponses
 
             gf.Player2ShipPlacement();
 
-            gf.GamePlay();
+            gf.FireShots();
         }
     }
 }

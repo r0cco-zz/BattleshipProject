@@ -16,13 +16,8 @@ namespace BattleShip.UI
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Clear();
 
-            Player player1;
-            Player player2;
-
             GameFlow gf = new GameFlow();
-            StartMenu sm = new StartMenu();
-
-            sm.DisplayStart();
+            SplashScreen.DisplayStart();
             Console.Clear();
 
             // move this crap to gameflow
@@ -42,7 +37,7 @@ namespace BattleShip.UI
             gf.Player2ShipPlacement();
             Console.Clear();
 
-            gf.GamePlay();
+            gf.FireShots();
 
             Console.ReadLine();
         }

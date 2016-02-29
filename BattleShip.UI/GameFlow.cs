@@ -14,16 +14,38 @@ namespace BattleShip.UI
 {
     internal class GameFlow
     {
-        private Player _player1;
-        private Player _player2;
+        private Player _player1 = new Player();
+        private Player _player2 = new Player();
 
         private bool _isPlayerOnesTurn = true;
         private bool _gameOver;
 
-        internal GameFlow(Player player1, Player player2)
+        public void PlayGame()
         {
-            _player1 = player1;
-            _player2 = player2;
+            GetPlayerNames();
+            //PlaceShips(_player1);
+            //PlaceShips(_player2);
+            //FireShots();
+            //PromptPlayAgain();
+        }
+
+        private void GetPlayerNames()
+        {
+            Console.Write("Player 1, What is your name? : ");
+            _player1.Name = Console.ReadLine();
+            if (_player1.Name == String.Empty)
+            {
+                _player1.Name = "Player1";
+            }
+
+            Console.Write("Player 2, what is your name? : ");
+            _player2.Name = Console.ReadLine();
+            if (_player2.Name == String.Empty)
+            {
+                _player2.Name = "Player2";
+            }
+
+            Console.Clear();
         }
 
         // get player 1 to place ships
@@ -379,7 +401,7 @@ namespace BattleShip.UI
         //TODO Refactoring - Combine Player1 & 2 shooting & gameplay into a single code base. Class receives input on which player's turn it is.
 
         // actual shooting and gameplay
-        public void GamePlay()
+        public void FireShots()
         {
             while (!_gameOver)
             {
