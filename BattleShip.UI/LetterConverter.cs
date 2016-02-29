@@ -33,7 +33,7 @@ namespace BattleShip.UI
                 case "j":
                     return 10;
                 default:
-                    return 42;
+                    return 0;
             }
         }
     }

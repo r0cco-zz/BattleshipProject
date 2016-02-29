@@ -55,7 +55,7 @@ namespace BattleShip.UI
                 _player1.Name = "Player1";
             }
 
-            Console.Write("Player 2, what is your name? : ");
+            Console.Write("\nPlayer 2, what is your name? : ");
             _player2.Name = Console.ReadLine();
             if (_player2.Name == String.Empty)
             {
@@ -232,6 +232,7 @@ namespace BattleShip.UI
                     TakeTurnsFiring(_player2, _player1.GameBoard);
                 }
             }
+            //TODO: give the victor a splash screen
             Console.Clear();
         }
 
