@@ -291,5 +291,15 @@ namespace BattleShip.BLL.GameLogic
 
             return false;
         }
+
+        public void RemoveLastShipFromBoard(ShipType stype)
+        {
+            foreach (var ship in ShipHistory.Where(item => item.Value == stype).ToList())
+            {
+                ShipHistory.Remove(ship.Key);
+            }
+            _currentShipIndex--;
+            _ships[_currentShipIndex] = null;
+        }
     }
 }

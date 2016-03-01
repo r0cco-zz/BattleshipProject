@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading.Tasks;
 using BattleShip.BLL.GameLogic;
 using BattleShip.BLL.Requests;
 using BattleShip.BLL.Responses;
@@ -30,17 +25,9 @@ namespace BattleShip.UI
             {
                 GetPlayerNames();
             }
-            Console.Clear();
-            Console.WriteLine("{0}, press enter to start placing ships.\n\n{1} LOOK AWAY!!", _player1.Name,
-                _player2.Name);
-            Console.ReadLine();
-            Console.Clear();
+            SplashScreen.DisplayLookAwayScreen(_player1, _player2);
             PlaceShips(_player1);
-            Console.Clear();
-            Console.WriteLine("{0}, press enter to start placing ships.\n\n{1} LOOK AWAY!!", _player2.Name,
-                _player1.Name);
-            Console.ReadLine();
-            Console.Clear();
+            SplashScreen.DisplayLookAwayScreen(_player2, _player1);
             PlaceShips(_player2);
             FireShots();
             PromptPlayAgain();
@@ -67,138 +54,151 @@ namespace BattleShip.UI
 
         private void PlaceShips(Player player)
         {
-
-            //TODO Refactoring - Implement Generic PlayerShipPlacement. 
-            //TODO HowTo: Create class to accept current player turn. Execute, return done. If player is player 2, move on.
-            //TODO Create additional classes to simplify workflow: PlaceShipRequest workflow.
-
-            // display empty game board for player1 (I put this in the loop)
-
-            // prompt player1 for coordinate entry (use letterconverter for xcoordinate)
-            foreach (ShipType stype in Enum.GetValues(typeof (ShipType)))
+            while (true)
             {
-                int shipLength;
-                switch (stype)
+                foreach (ShipType stype in Enum.GetValues(typeof (ShipType)))
                 {
-                    case ShipType.Destroyer:
-                        shipLength = 2;
-                        break;
-                    case ShipType.Cruiser:
-                    case ShipType.Submarine:
-                        shipLength = 3;
-                        break;
-                    case ShipType.Battleship:
-                        shipLength = 4;
-                        break;
-                    case ShipType.Carrier:
-                        shipLength = 5;
-                        break;
-                    default:
-                        shipLength = 0;
-                        break;
-                }
-                bool placementIsGood;
-
-                do
-                {
-                    string shipplacecoord;
-                    bool coordIsValid;
-                    do
+                    int shipLength;
+                    switch (stype)
                     {
-                        BoardUI.DisplayGameBoardForShipPlacement(player.GameBoard);
-
-                        var isItValid = new IsPlayercoordValid();
-
-                        Console.WriteLine();
-                        Console.Write("{0}, pick a coordinate for your {1} : ", player.Name, stype);
-                        shipplacecoord = Console.ReadLine();
-
-                        coordIsValid = isItValid.IsItGood(shipplacecoord);
-
-                        if (!coordIsValid)
-                        {
-                            Console.WriteLine("That is not a valid coordinate. Press enter to choose again");
-                            Console.ReadLine();
-                            Console.Clear();
-                        }
-
-                    } while (!coordIsValid);
-
-                    var xAsLetter = shipplacecoord.Substring(0, 1);
-                    var shipX = LetterConverter.ConvertToNumber(xAsLetter); //Convert 1st char from player input to int.
-                    var shipY = int.Parse(shipplacecoord.Substring(1)); //Assign 2nd coord.
-
-                    var shipcoord = new Coordinate(shipX, shipY);
-
-                    // and then, asking for ship direction
-                    Console.Write("{0}, Enter a direction (up, down, left, right) for your {1} (length {2}) : ",
-                        player.Name, stype, shipLength);
-                    var shipPlacementDirection = Console.ReadLine();
-
-                    var isDirInputValid = new IsDirectionValid();
-
-                    var inputResponse = isDirInputValid.WhatIsDirection(shipPlacementDirection);
-
-                    switch (inputResponse)
-                    {
-                        //TODO: move this switch inside the shiprequest constructor
-                        case 1:
-                        {
-                            PlaceShipRequest shipRequest = new PlaceShipRequest
-                            {
-                                Coordinate = shipcoord,
-                                Direction = ShipDirection.Up,
-                                ShipType = stype
-                            };
-                            placementIsGood = CheckShipPlacement(player, shipRequest, stype);
-                        }
+                        case ShipType.Destroyer:
+                            shipLength = 2;
                             break;
-                        case 2:
-                        {
-                            PlaceShipRequest shipRequest = new PlaceShipRequest
-                            {
-                                Coordinate = shipcoord,
-                                Direction = ShipDirection.Down,
-                                ShipType = stype
-                            };
-                            placementIsGood = CheckShipPlacement(player, shipRequest, stype);
-                        }
+                        case ShipType.Cruiser:
+                        case ShipType.Submarine:
+                            shipLength = 3;
                             break;
-                        case 3:
-                        {
-                            PlaceShipRequest shipRequest = new PlaceShipRequest
-                            {
-                                Coordinate = shipcoord,
-                                Direction = ShipDirection.Left,
-                                ShipType = stype
-                            };
-
-                            placementIsGood = CheckShipPlacement(player, shipRequest, stype);
-                        }
+                        case ShipType.Battleship:
+                            shipLength = 4;
                             break;
-                        case 4:
-                        {
-                            PlaceShipRequest shipRequest = new PlaceShipRequest
-                            {
-                                Coordinate = shipcoord,
-                                Direction = ShipDirection.Right,
-                                ShipType = stype
-                            };
-
-                            placementIsGood = CheckShipPlacement(player, shipRequest, stype);
-                        }
+                        case ShipType.Carrier:
+                            shipLength = 5;
                             break;
                         default:
-                            //TODO: invalid input for direction, board should be redrawn and placement restarted
-                            placementIsGood = false;
+                            shipLength = 0;
                             break;
                     }
-                } while (!placementIsGood);
+
+                    bool placementIsGood;
+                    do
+                    {
+                        string shipplacecoord;
+                        bool coordIsValid;
+                        do
+                        {
+                            BoardUI.DisplayGameBoardForShipPlacement(player.GameBoard);
+
+                            var isItValid = new IsPlayercoordValid();
+
+                            Console.WriteLine();
+                            Console.Write("{0}, pick a coordinate for your {1} : ", player.Name, stype);
+                            shipplacecoord = Console.ReadLine();
+
+                            coordIsValid = isItValid.IsItGood(shipplacecoord);
+
+                            if (!coordIsValid)
+                            {
+                                Console.WriteLine("That is not a valid coordinate. Press enter to choose again");
+                                Console.ReadLine();
+                                Console.Clear();
+                            }
+                        } while (!coordIsValid);
+
+                        var xAsLetter = shipplacecoord.Substring(0, 1);
+                        var shipX = LetterConverter.ConvertToNumber(xAsLetter);
+                        var shipY = int.Parse(shipplacecoord.Substring(1));
+
+                        var shipcoord = new Coordinate(shipX, shipY);
+
+                        Console.Write("{0}, Enter a direction (up, down, left, right) for your {1} (length {2}) : ", player.Name, stype, shipLength);
+                        var shipPlacementDirection = Console.ReadLine();
+
+                        var isDirInputValid = new IsDirectionValid();
+
+                        var inputResponse = isDirInputValid.WhatIsDirection(shipPlacementDirection);
+
+                        switch (inputResponse)
+                        {
+                            case 1:
+                            {
+                                PlaceShipRequest shipRequest = new PlaceShipRequest
+                                {
+                                    Coordinate = shipcoord, Direction = ShipDirection.Up, ShipType = stype
+                                };
+                                placementIsGood = CheckShipPlacement(player, shipRequest, stype);
+                            }
+                                break;
+                            case 2:
+                            {
+                                PlaceShipRequest shipRequest = new PlaceShipRequest
+                                {
+                                    Coordinate = shipcoord, Direction = ShipDirection.Down, ShipType = stype
+                                };
+                                placementIsGood = CheckShipPlacement(player, shipRequest, stype);
+                            }
+                                break;
+                            case 3:
+                            {
+                                PlaceShipRequest shipRequest = new PlaceShipRequest
+                                {
+                                    Coordinate = shipcoord, Direction = ShipDirection.Left, ShipType = stype
+                                };
+
+                                placementIsGood = CheckShipPlacement(player, shipRequest, stype);
+                            }
+                                break;
+                            case 4:
+                            {
+                                PlaceShipRequest shipRequest = new PlaceShipRequest
+                                {
+                                    Coordinate = shipcoord, Direction = ShipDirection.Right, ShipType = stype
+                                };
+
+                                placementIsGood = CheckShipPlacement(player, shipRequest, stype);
+                            }
+                                break;
+                            default:
+                                Console.WriteLine("That is not a valid direction. Please place your {0} again", stype);
+                                Console.WriteLine("Press enter");
+                                Console.ReadLine();
+                                Console.Clear();
+                                placementIsGood = false;
+                                break;
+                        }
+                        if (placementIsGood)
+                        {
+                            Console.Clear();
+                            BoardUI.DisplayGameBoardForShipPlacement(player.GameBoard);
+                            Console.WriteLine();
+                            Console.Write("Is this your desired position for your {0}? y or n : ", stype);
+                            var changePosition = Console.ReadLine();
+                            if (!String.IsNullOrEmpty(changePosition) && (changePosition.ToLower() == "n" || changePosition.ToLower() == "no"))
+                            {
+                                placementIsGood = false;
+                                player.GameBoard.RemoveLastShipFromBoard(stype);
+                                Console.Clear();
+                            }
+                        }
+                    } while (!placementIsGood);
+                    Console.Clear();
+                }
+                BoardUI.DisplayGameBoardForShipPlacement(player.GameBoard);
+                Console.WriteLine();
+                Console.WriteLine("Would you like to re-position your ships? (This will clear the board)");
+                Console.Write("y or n? : ");
+                var reposition = Console.ReadLine();
+                if (!String.IsNullOrEmpty(reposition) && (reposition.ToLower() == "y" || reposition.ToLower() == "yes"))
+                {
+                    player.GameBoard = new Board();
+                    Console.Clear();
+                    continue;
+                }
                 Console.Clear();
+                break;
             }
         }
 
-        private bool CheckShipPlacement(Player player, PlaceShipRequest request, ShipType stype)
+        private static bool CheckShipPlacement(Player player, PlaceShipRequest request, ShipType stype)
         {
             var whereIsShip = player.GameBoard.PlaceShip(request);
             switch (whereIsShip)
@@ -223,16 +223,14 @@ namespace BattleShip.UI
             }
         }
 
-        //TODO Refactoring - Combine Player1 & 2 shooting & gameplay into a single code base. Class receives input on which player's turn it is.
-        // actual shooting and gameplay
         public void FireShots()
         {
             while (!_gameOver)
             {
                 while (_isPlayerOnesTurn && !_gameOver)
                 {
-                    //TODO:reverse these boards so player is taking shots in his own board and vice versa
                     TakeTurnsFiring(_player1, _player2.GameBoard);
+                    //TODO put a splash screen in between shots
                 }
                 while (!_isPlayerOnesTurn && !_gameOver)
                 {
@@ -254,6 +252,7 @@ namespace BattleShip.UI
 
                 IsPlayercoordValid IsItValid = new IsPlayercoordValid();
 
+                Console.WriteLine();
                 Console.Write("{0}, Take a shot! : ", player.Name);
                 playerShot = Console.ReadLine();
 

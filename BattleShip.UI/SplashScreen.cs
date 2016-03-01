@@ -19,9 +19,22 @@ namespace BattleShip.UI
             Console.Clear();
         }
 
+        public static void DisplayExitScreen()
+        {
+            
+        }
+
         public static void DisplayVictoryScreen(string playerName)
         {
             
+        }
+
+        public static void DisplayLookAwayScreen(Player playerBeingAddressed, Player playerBeingToldToLookAway)
+        {
+            Console.WriteLine("{0}, press enter to start placing ships.\n\n{1} LOOK AWAY!!", playerBeingAddressed.Name,
+               playerBeingToldToLookAway.Name);
+            Console.ReadLine();
+            Console.Clear();
         }
     }
 }
