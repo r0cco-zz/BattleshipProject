@@ -21,6 +21,14 @@ namespace BattleShip.UI
             _player1.GameBoard = new Board();
             _player2.GameBoard = new Board();
 
+            //Setting game colors.
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Clear();
+
+            SplashScreen.DisplayStart();
+            Console.Clear();
+
             if (_freshGame)
             {
                 GetPlayerNames();

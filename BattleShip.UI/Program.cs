@@ -11,15 +11,7 @@ namespace BattleShip.UI
     {
         private static void Main(string[] args)
         {
-            //Setting game colors.
-            Console.BackgroundColor = ConsoleColor.DarkBlue;
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Clear();
-
             var gf = new GameFlow();
-            SplashScreen.DisplayStart();
-            Console.Clear();
-
             gf.PlayGame();
 
             Console.ReadLine();
