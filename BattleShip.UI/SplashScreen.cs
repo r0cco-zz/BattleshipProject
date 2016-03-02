@@ -101,6 +101,29 @@ namespace BattleShip.UI
 888888888888888888   d88888888888888b   88888888888888888888
 8888888888888888888oo8888888888888888oo888888888888888888888
 888888888888888888888888888888888888888888888888888888888888");
+            Console.WriteLine();
+            Console.WriteLine("Press enter to continue");
+            Console.ReadLine();
+            Console.Clear();
+        }
+
+        public static void DisplayBeginFiringScreen()
+        {
+            Console.WriteLine("Prepare to begin firing!!!");
+            Console.WriteLine();
+            Console.WriteLine(@"                                     # #  ( )
+                                  ___#_#___|__
+                              _  |____________|  _
+                       _=====| | |            | | |==== _
+                 =====| |.---------------------------. | |====
+   <--------------------'   .  .  .  .  .  .  .  .   '--------------/
+     \                                                             /
+      \_______________________________________________WWS_________/
+  wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+   wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww ");
+            Console.WriteLine();
+            Console.WriteLine("Press enter to continue");
             Console.ReadLine();
             Console.Clear();
         }

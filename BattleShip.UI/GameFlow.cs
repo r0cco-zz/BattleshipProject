@@ -26,17 +26,16 @@ namespace BattleShip.UI
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Clear();
 
-            SplashScreen.DisplayStart();
-            Console.Clear();
-
             if (_freshGame)
             {
+                SplashScreen.DisplayStart();
                 GetPlayerNames();
             }
             SplashScreen.DisplayLookAwayScreen(_player1, _player2);
             PlaceShips(_player1);
             SplashScreen.DisplayLookAwayScreen(_player2, _player1);
             PlaceShips(_player2);
+            SplashScreen.DisplayBeginFiringScreen();
             FireShots();
             PromptPlayAgain();
         }
@@ -237,7 +236,7 @@ namespace BattleShip.UI
             {
                 while (_isPlayerOnesTurn && !_gameOver)
                 {
-                    TakeTurnsFiring(_player1, _player2.GameBoard);
+                    TakeTurnsFiring(_player1, _player2.GameBoard, _player2);
                     if (_gameOver)
                     {
                         SplashScreen.DisplayVictoryScreen(_player1, _player2);
@@ -245,7 +244,7 @@ namespace BattleShip.UI
                 }
                 while (!_isPlayerOnesTurn && !_gameOver)
                 {
-                    TakeTurnsFiring(_player2, _player1.GameBoard);
+                    TakeTurnsFiring(_player2, _player1.GameBoard, _player1);
                     if (_gameOver)
                     {
                         SplashScreen.DisplayVictoryScreen(_player2, _player1);
@@ -255,7 +254,7 @@ namespace BattleShip.UI
             Console.Clear();
         }
 
-        public void TakeTurnsFiring(Player player, Board boardToBeFiredUpon)
+        public void TakeTurnsFiring(Player player, Board boardToBeFiredUpon, Player opposingPlayer)
         {
             string playerShot;
             bool coordIsValid;
@@ -312,9 +311,7 @@ namespace BattleShip.UI
                     break;
 
                 case ShotStatus.HitAndSunk:
-                    //TODO: player name instead of "opponent"?
-                    Console.WriteLine("Hit! You sunk your opponent's " + playerFireShotResponse.ShipImpacted +
-                                      " (Press enter)");
+                    Console.WriteLine("Hit! You sunk {0}'s {1}, (Press enter)", opposingPlayer.Name, playerFireShotResponse.ShipImpacted);
                     Console.ReadLine();
                     Console.Clear();
                     if (_isPlayerOnesTurn)
@@ -366,7 +363,6 @@ namespace BattleShip.UI
             if (!String.IsNullOrEmpty(playAgain) && (playAgain.ToLower() == "y" || playAgain.ToLower() == "yes"))
             {
                 Console.Clear();
-                //TODO: ask them if they want to enter new names
                 _freshGame = false;
                 _gameOver = false;
                 PlayGame();
