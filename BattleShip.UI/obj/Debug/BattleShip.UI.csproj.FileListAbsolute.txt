@@ -14,3 +14,11 @@ C:\_repos\BattleshipProject\BattleShip.UI\bin\Debug\BattleShip.UI.pdb
 C:\_repos\BattleshipProject\BattleShip.UI\bin\Debug\BattleShip.BLL.dll
 C:\_repos\BattleshipProject\BattleShip.UI\bin\Debug\BattleShip.BLL.pdb
 C:\_repos\BattleshipProject\BattleShip.UI\obj\Debug\BattleShip.UI.csprojResolveAssemblyReference.cache
+D:\_repos\BattleshipProject\BattleShip.UI\bin\Debug\BattleShip.UI.exe.config
+D:\_repos\BattleshipProject\BattleShip.UI\bin\Debug\BattleShip.UI.exe
+D:\_repos\BattleshipProject\BattleShip.UI\bin\Debug\BattleShip.UI.pdb
+D:\_repos\BattleshipProject\BattleShip.UI\bin\Debug\BattleShip.BLL.dll
+D:\_repos\BattleshipProject\BattleShip.UI\bin\Debug\BattleShip.BLL.pdb
+D:\_repos\BattleshipProject\BattleShip.UI\obj\Debug\BattleShip.UI.csprojResolveAssemblyReference.cache
+D:\_repos\BattleshipProject\BattleShip.UI\obj\Debug\BattleShip.UI.exe
+D:\_repos\BattleshipProject\BattleShip.UI\obj\Debug\BattleShip.UI.pdb

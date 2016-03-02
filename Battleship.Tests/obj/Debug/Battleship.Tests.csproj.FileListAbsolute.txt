@@ -7,3 +7,12 @@ C:\_repos\BattleshipProject\Battleship.Tests\bin\Debug\nunit.framework.xml
 C:\_repos\BattleshipProject\Battleship.Tests\obj\Debug\Battleship.Tests.csprojResolveAssemblyReference.cache
 C:\_repos\BattleshipProject\Battleship.Tests\obj\Debug\Battleship.Tests.dll
 C:\_repos\BattleshipProject\Battleship.Tests\obj\Debug\Battleship.Tests.pdb
+D:\_repos\BattleshipProject\Battleship.Tests\obj\Debug\Battleship.Tests.csprojResolveAssemblyReference.cache
+D:\_repos\BattleshipProject\Battleship.Tests\bin\Debug\Battleship.Tests.dll
+D:\_repos\BattleshipProject\Battleship.Tests\bin\Debug\Battleship.Tests.pdb
+D:\_repos\BattleshipProject\Battleship.Tests\bin\Debug\BattleShip.BLL.dll
+D:\_repos\BattleshipProject\Battleship.Tests\bin\Debug\nunit.framework.dll
+D:\_repos\BattleshipProject\Battleship.Tests\bin\Debug\BattleShip.BLL.pdb
+D:\_repos\BattleshipProject\Battleship.Tests\bin\Debug\nunit.framework.xml
+D:\_repos\BattleshipProject\Battleship.Tests\obj\Debug\Battleship.Tests.dll
+D:\_repos\BattleshipProject\Battleship.Tests\obj\Debug\Battleship.Tests.pdb

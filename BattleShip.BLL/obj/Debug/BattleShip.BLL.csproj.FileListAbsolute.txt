@@ -8,3 +8,7 @@ C:\_repos\BattleshipProject\BattleShip.BLL\bin\Debug\BattleShip.BLL.pdb
 C:\_repos\BattleshipProject\BattleShip.BLL\obj\Debug\BattleShip.BLL.csprojResolveAssemblyReference.cache
 C:\_repos\BattleshipProject\BattleShip.BLL\obj\Debug\BattleShip.BLL.dll
 C:\_repos\BattleshipProject\BattleShip.BLL\obj\Debug\BattleShip.BLL.pdb
+D:\_repos\BattleshipProject\BattleShip.BLL\bin\Debug\BattleShip.BLL.dll
+D:\_repos\BattleshipProject\BattleShip.BLL\bin\Debug\BattleShip.BLL.pdb
+D:\_repos\BattleshipProject\BattleShip.BLL\obj\Debug\BattleShip.BLL.dll
+D:\_repos\BattleshipProject\BattleShip.BLL\obj\Debug\BattleShip.BLL.pdb

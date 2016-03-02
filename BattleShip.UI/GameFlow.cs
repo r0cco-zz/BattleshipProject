@@ -238,14 +238,20 @@ namespace BattleShip.UI
                 while (_isPlayerOnesTurn && !_gameOver)
                 {
                     TakeTurnsFiring(_player1, _player2.GameBoard);
-                    //TODO put a splash screen in between shots
+                    if (_gameOver)
+                    {
+                        SplashScreen.DisplayVictoryScreen(_player1, _player2);
+                    }
                 }
                 while (!_isPlayerOnesTurn && !_gameOver)
                 {
                     TakeTurnsFiring(_player2, _player1.GameBoard);
+                    if (_gameOver)
+                    {
+                        SplashScreen.DisplayVictoryScreen(_player2, _player1);
+                    }
                 }
             }
-            //TODO: give the victor a splash screen
             Console.Clear();
         }
 
@@ -367,9 +373,8 @@ namespace BattleShip.UI
             }
             else
             {
-                //TODO: make a splash screen for game exit
                 Console.WriteLine("Thanks for playing! Press Enter to quit.");
-                Console.ReadLine();
+                SplashScreen.DisplayExitScreen();
             }
         }
     }
