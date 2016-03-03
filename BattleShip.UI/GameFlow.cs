@@ -230,7 +230,7 @@ namespace BattleShip.UI
             }
         }
 
-        public void FireShots()
+        private void FireShots()
         {
             while (!_gameOver)
             {
@@ -254,7 +254,7 @@ namespace BattleShip.UI
             Console.Clear();
         }
 
-        public void TakeTurnsFiring(Player player, Board boardToBeFiredUpon, Player opposingPlayer)
+        private void TakeTurnsFiring(Player player, Board boardToBeFiredUpon, Player opposingPlayer)
         {
             string playerShot;
             bool coordIsValid;
