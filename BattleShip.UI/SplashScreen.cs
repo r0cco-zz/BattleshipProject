@@ -74,8 +74,8 @@ namespace BattleShip.UI
  ~  //\\/////\\\\\\\ \/\/  /     + ~ //\\/\  ~~
  ~ ///\//////\\\\\\\\/ /  /   8\ /   ~~~~~~  ~  ~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            Console.ReadLine();
-            Console.ReadLine();
+            Console.WriteLine();
+            Console.WriteLine();
             Console.WriteLine("Congratulations {0}, you trounced {1}!!", winningPlayer.Name, losingPlayer.Name);
             Console.ReadLine();
             Console.Clear();
