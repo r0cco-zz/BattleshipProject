@@ -66,6 +66,7 @@ namespace BattleShip.UI
 
         public static void DisplayVictoryScreen(Player winningPlayer, Player losingPlayer)
         {
+            //TODO redraw this to be more like a ship sinking
             Console.WriteLine(@".  * . .    *. .  *  . . *  . * . .  * .  .    *
  *     *    /\  .  .   *  .  *  . *  .  .  * .
   . *  . . //\\/\ .  * . . .   .  .  * . * .  *
