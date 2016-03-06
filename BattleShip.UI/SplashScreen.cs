@@ -58,10 +58,8 @@ namespace BattleShip.UI
                              / 
             
                     Thanks for playing!!
-                    Press enter to exit
 ");
-            Console.ReadLine();
-            Console.Clear();
+            System.Threading.Thread.Sleep(300);
         }
 
         public static void DisplayVictoryScreen(Player winningPlayer, Player losingPlayer)

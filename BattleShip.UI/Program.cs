@@ -13,8 +13,6 @@ namespace BattleShip.UI
         {
             var gf = new GameFlow();
             gf.PlayGame();
-
-            Console.ReadLine();
         }
     }
 }
